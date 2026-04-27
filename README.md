@@ -1,59 +1,86 @@
-# BookingFrontend
+# BarberBook — Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.1.
+> Modern appointment booking web app built with Angular 21. Features a beautiful dark UI, JWT authentication, user booking history, and a full admin dashboard.
 
-## Development server
+## Tech Stack
 
-To start a local development server, run:
+- **Angular 21** — standalone components, new control flow (`@if` / `@for`)
+- **TypeScript** — strict typing throughout
+- **RxJS** — reactive HTTP with observables
+- **Angular Router** — lazy-loaded routes with auth guards
+- **CSS** — custom dark theme with purple gradients, fully responsive
+
+## Features
+
+- **Authentication** — login, register, JWT stored in localStorage
+- **Booking Form** — request appointments with service selection & date/time picker
+- **My Appointments** — personal booking history with status badges
+- **Admin Dashboard** — view all bookings, confirm or cancel, delete entries
+- **Role-based routing** — guards redirect users and admins to correct pages
+- **Responsive design** — single viewport layout on desktop, mobile-friendly
+- **No-scroll UI** — full page fits in viewport on desktop (`height: 100vh`)
+
+## Screenshots
+
+| Login | Booking Form | Admin Dashboard |
+|-------|-------------|-----------------|
+| Split-screen dark UI | Hero + form layout | Sidebar stats + table |
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- Angular CLI 21
 
 ```bash
+npm install -g @angular/cli
+```
+
+### Install & Run
+
+```bash
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+App runs at `http://localhost:4200`.
 
-## Code scaffolding
+> Make sure the [backend](https://github.com/sebxstixn15/barberbook-backend) is running on `http://localhost:8080`.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Project Structure
 
-```bash
-ng generate component component-name
+```
+src/app/
+├── components/
+│   ├── admin/           # Admin dashboard
+│   ├── booking-form/    # Appointment booking page
+│   ├── login/           # Login page
+│   ├── my-bookings/     # User appointment history
+│   └── register/        # Registration page
+├── guards/              # Auth & admin route guards
+├── models/              # TypeScript interfaces
+├── pipes/               # StatusCount pipe
+└── services/            # Auth & Booking HTTP services
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Routes
 
-```bash
-ng generate --help
+| Path | Component | Guard |
+|------|-----------|-------|
+| `/login` | LoginComponent | — |
+| `/register` | RegisterComponent | — |
+| `/book` | BookingFormComponent | — |
+| `/my-bookings` | MyBookingsComponent | authGuard |
+| `/admin` | AdminComponent | adminGuard |
+
+## Default Admin Account
+
+```
+Email:    admin@booking.at
+Password: admin123
 ```
 
-## Building
+## Related
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- **Backend:** [barberbook-backend](https://github.com/sebxstixn15/barberbook-backend)
