@@ -1,0 +1,89 @@
+<div class="shell">
+  <nav class="nav">
+    <div class="brand">✂️ BarberBook <span class="abadge">Admin</span></div>
+    <div class="links">
+      <a routerLink="/book" class="link">Booking Page</a>
+      <button class="btn-out" (click)="authService.logout()">Sign Out</button>
+    </div>
+  </nav>
+
+  <div class="body">
+    <div class="sidebar">
+      <div class="stat-group">
+        <div class="sg-label">Overview</div>
+        <div class="stat" (click)="filter='ALL'" [class.active]="filter==='ALL'">
+          <span class="snum">{{ counts.all }}</span><span class="slbl">All</span>
+        </div>
+        <div class="stat pend" (click)="filter='PENDING'" [class.active]="filter==='PENDING'">
+          <span class="snum">{{ counts.pending }}</span><span class="slbl">Pending</span>
+        </div>
+        <div class="stat conf" (click)="filter='CONFIRMED'" [class.active]="filter==='CONFIRMED'">
+          <span class="snum">{{ counts.confirmed }}</span><span class="slbl">Confirmed</span>
+        </div>
+        <div class="stat canc" (click)="filter='CANCELLED'" [class.active]="filter==='CANCELLED'">
+          <span class="snum">{{ counts.cancelled }}</span><span class="slbl">Cancelled</span>
+        </div>
+      </div>
+      <button class="refresh" (click)="load()">↻ Refresh</button>
+    </div>
+
+    <div class="content">
+      <div class="content-header">
+        <h1>Bookings</h1>
+        <span class="count-badge">{{ filtered.length }} entries</span>
+      </div>
+
+      @if (loading) {
+        <div class="loading"><div class="spin"></div></div>
+      } @else if (filtered.length === 0) {
+        <div class="empty">No bookings in this category.</div>
+      } @else {
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Contact</th>
+                <th>Service</th>
+                <th>Appointment</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (b of filtered; track b.id) {
+                <tr>
+                  <td>
+                    <div class="cname">{{ b.customerName }}</div>
+                    <div class="csub">{{ b.createdAt | date:'MM/dd/yy' }}</div>
+                  </td>
+                  <td>
+                    <div class="cinfo">{{ b.customerEmail }}</div>
+                    @if (b.customerPhone) { <div class="cinfo">{{ b.customerPhone }}</div> }
+                  </td>
+                  <td><span class="stag">{{ b.service }}</span></td>
+                  <td>
+                    <div class="ddate">{{ b.bookingTime | date:'MM/dd/yyyy' }}</div>
+                    <div class="dtime">{{ b.bookingTime | date:'hh:mm a' }}</div>
+                  </td>
+                  <td><span [class]="'badge ' + statusClass(b.status!)">{{ statusLabel(b.status!) }}</span></td>
+                  <td>
+                    <div class="acts">
+                      @if (b.status !== 'CONFIRMED') {
+                        <button class="ab conf" (click)="updateStatus(b.id!, 'CONFIRMED')">✓</button>
+                      }
+                      @if (b.status !== 'CANCELLED') {
+                        <button class="ab canc" (click)="updateStatus(b.id!, 'CANCELLED')">✗</button>
+                      }
+                      <button class="ab del" (click)="delete(b.id!)">🗑</button>
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </div>
+  </div>
+</div>

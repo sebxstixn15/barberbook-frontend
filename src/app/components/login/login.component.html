@@ -1,0 +1,27 @@
+<div class="shell">
+  <div class="left">
+    <div class="brand">✂️ BarberBook</div>
+    <h1>Welcome<br>back.</h1>
+    <p>Manage your appointments quickly and easily.</p>
+  </div>
+  <div class="right">
+    <div class="card">
+      <h2>Sign In</h2>
+      <p class="sub">Good to see you again!</p>
+      @if (error) { <div class="err">{{ error }}</div> }
+      <form (ngSubmit)="onSubmit()">
+        <div class="field">
+          <label>Email</label>
+          <input type="email" [(ngModel)]="email" name="email" required placeholder="your@email.com" />
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" [(ngModel)]="password" name="password" required placeholder="••••••••" />
+        </div>
+        <button type="submit" [disabled]="loading">{{ loading ? 'Signing in...' : 'Sign In' }}</button>
+      </form>
+      <p class="sw">Don't have an account? <a routerLink="/register">Register</a></p>
+      <p class="sw"><a routerLink="/book">Book without account →</a></p>
+    </div>
+  </div>
+</div>

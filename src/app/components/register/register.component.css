@@ -1,0 +1,23 @@
+:host { display: block; }
+.shell { height: 100vh; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; font-family: 'Segoe UI', sans-serif; }
+.left { background: linear-gradient(135deg,#0f0c29,#302b63,#24243e); display: flex; flex-direction: column; justify-content: center; padding: 4rem; }
+.brand { color: rgba(255,255,255,0.6); font-size: 1rem; font-weight: 700; margin-bottom: 3rem; }
+h1 { color: white; font-size: clamp(2rem,3vw,3rem); margin: 0 0 1rem; line-height: 1.2; }
+.g { background: linear-gradient(135deg,#a78bfa,#ec4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.left > p { color: rgba(255,255,255,0.55); font-size: 1rem; }
+.right { background: #0a0a0f; display: flex; align-items: center; justify-content: center; padding: 2rem; }
+.card { width: 100%; max-width: 400px; }
+.card h2 { color: white; font-size: 1.8rem; margin: 0 0 0.3rem; }
+.sub { color: rgba(255,255,255,0.45); margin: 0 0 2rem; font-size: 0.9rem; }
+.field { margin-bottom: 1.1rem; }
+label { display: block; color: rgba(255,255,255,0.7); font-size: 0.82rem; font-weight: 600; margin-bottom: 0.4rem; }
+input { width: 100%; padding: 0.8rem 1rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: white; font-size: 0.95rem; box-sizing: border-box; }
+input::placeholder { color: rgba(255,255,255,0.22); }
+input:focus { outline: none; border-color: #a78bfa; }
+button { width: 100%; padding: 0.9rem; background: linear-gradient(135deg,#7c3aed,#a855f7); color: white; border: none; border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 0.5rem; transition: all 0.2s; box-shadow: 0 4px 15px rgba(124,58,237,0.35); }
+button:hover:not(:disabled) { transform: translateY(-1px); }
+button:disabled { opacity: 0.55; cursor: not-allowed; }
+.err { background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.3); color: #fca5a5; padding: 0.75rem 1rem; border-radius: 8px; margin-bottom: 1.2rem; font-size: 0.88rem; }
+.sw { color: rgba(255,255,255,0.45); margin-top: 1rem; font-size: 0.88rem; text-align: center; }
+.sw a { color: #a78bfa; text-decoration: none; font-weight: 600; }
+@media (max-width: 700px) { .shell { grid-template-columns: 1fr; } .left { display: none; } }

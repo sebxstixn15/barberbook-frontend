@@ -1,0 +1,67 @@
+<div class="shell">
+  <nav class="nav">
+    <a routerLink="/book" class="brand">✂️ BarberBook</a>
+    <div class="links">
+      <a routerLink="/book" class="link">New Appointment</a>
+      @if (authService.isAdmin()) { <a routerLink="/admin" class="link">Admin</a> }
+      <button class="btn-out" (click)="authService.logout()">Sign Out</button>
+    </div>
+  </nav>
+
+  <div class="body">
+    <div class="sidebar">
+      <div class="user-info">
+        <div class="avatar">{{ authService.getUser()?.name?.charAt(0) }}</div>
+        <div>
+          <div class="uname">{{ authService.getUser()?.name }}</div>
+          <div class="uemail">{{ authService.getUser()?.email }}</div>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <div class="snum">{{ bookings.length }}</div>
+          <div class="slbl">Total</div>
+        </div>
+        <div class="stat">
+          <div class="snum pend">{{ bookings | statusCount:'PENDING' }}</div>
+          <div class="slbl">Pending</div>
+        </div>
+        <div class="stat">
+          <div class="snum conf">{{ bookings | statusCount:'CONFIRMED' }}</div>
+          <div class="slbl">Confirmed</div>
+        </div>
+      </div>
+      <a routerLink="/book" class="new-btn">+ New Appointment</a>
+    </div>
+
+    <div class="content">
+      <h1>My Appointments</h1>
+      @if (loading) {
+        <div class="loading"><div class="spin"></div></div>
+      } @else if (bookings.length === 0) {
+        <div class="empty">
+          <div class="empty-icon">📅</div>
+          <h2>No appointments yet</h2>
+          <p>Book your first appointment!</p>
+          <a routerLink="/book" class="new-btn">Book now</a>
+        </div>
+      } @else {
+        <div class="list">
+          @for (b of bookings; track b.id) {
+            <div class="card">
+              <div class="card-left">
+                <div class="service">{{ b.service }}</div>
+                <div class="dt">{{ b.bookingTime | date:'MMMM d, yyyy' }} · {{ b.bookingTime | date:'hh:mm a' }}</div>
+                <div class="meta">{{ b.customerEmail }}</div>
+              </div>
+              <div class="card-right">
+                <span [class]="'badge ' + statusClass(b.status!)">{{ statusLabel(b.status!) }}</span>
+                <div class="created">{{ b.createdAt | date:'MM/dd/yy' }}</div>
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>

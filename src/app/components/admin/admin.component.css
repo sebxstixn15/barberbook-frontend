@@ -1,0 +1,64 @@
+:host { display: block; }
+.shell { height: 100vh; overflow: hidden; display: flex; flex-direction: column; background: #0a0a0f; font-family: 'Segoe UI', sans-serif; }
+
+.nav { flex-shrink:0; display:flex; align-items:center; justify-content:space-between; padding:0 2rem; height:60px; background:rgba(10,10,15,0.95); border-bottom:1px solid rgba(255,255,255,0.06); }
+.brand { color:white; font-size:1.1rem; font-weight:700; display:flex; align-items:center; gap:0.6rem; }
+.abadge { background:rgba(124,58,237,0.3); color:#a78bfa; padding:0.2rem 0.6rem; border-radius:6px; font-size:0.7rem; font-weight:700; }
+.links { display:flex; align-items:center; gap:1.2rem; }
+.link { color:rgba(255,255,255,0.65); text-decoration:none; font-size:0.88rem; }
+.btn-out { background:transparent; border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.65); padding:0.4rem 1rem; border-radius:8px; cursor:pointer; font-size:0.88rem; }
+
+.body { flex:1; display:grid; grid-template-columns:220px 1fr; overflow:hidden; }
+
+.sidebar { border-right:1px solid rgba(255,255,255,0.06); padding:1.5rem 1.2rem; display:flex; flex-direction:column; gap:1rem; }
+.sg-label { color:rgba(255,255,255,0.35); font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.3rem; }
+.stat { display:flex; justify-content:space-between; align-items:center; padding:0.7rem 0.9rem; border-radius:10px; cursor:pointer; border:1px solid transparent; transition:all 0.2s; }
+.stat:hover { background:rgba(255,255,255,0.04); }
+.stat.active { background:rgba(124,58,237,0.12); border-color:rgba(167,139,250,0.3); }
+.stat.pend.active { background:rgba(251,191,36,0.08); border-color:rgba(251,191,36,0.3); }
+.stat.conf.active { background:rgba(34,197,94,0.08); border-color:rgba(34,197,94,0.3); }
+.stat.canc.active { background:rgba(239,68,68,0.08); border-color:rgba(239,68,68,0.3); }
+.snum { color:white; font-weight:700; font-size:1.1rem; }
+.slbl { color:rgba(255,255,255,0.45); font-size:0.82rem; }
+.refresh { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.6); padding:0.6rem; border-radius:8px; cursor:pointer; font-size:0.85rem; margin-top:auto; }
+.refresh:hover { background:rgba(255,255,255,0.1); }
+
+.content { display:flex; flex-direction:column; overflow:hidden; padding:1.5rem 2rem; }
+.content-header { display:flex; align-items:center; gap:1rem; margin-bottom:1.2rem; flex-shrink:0; }
+.content-header h1 { color:white; font-size:1.5rem; margin:0; }
+.count-badge { background:rgba(124,58,237,0.2); color:#a78bfa; padding:0.25rem 0.7rem; border-radius:20px; font-size:0.8rem; font-weight:600; }
+
+.loading { display:flex; justify-content:center; align-items:center; flex:1; }
+.spin { width:36px; height:36px; border:3px solid rgba(255,255,255,0.1); border-top-color:#a78bfa; border-radius:50%; animation:sp 1s linear infinite; }
+@keyframes sp { to { transform:rotate(360deg); } }
+.empty { flex:1; display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,0.4); font-size:0.95rem; }
+
+.table-wrap { flex:1; overflow-y:auto; border-radius:14px; border:1px solid rgba(255,255,255,0.07); }
+table { width:100%; border-collapse:collapse; }
+thead tr { background:rgba(255,255,255,0.03); position:sticky; top:0; }
+th { padding:0.8rem 1rem; text-align:left; color:rgba(255,255,255,0.4); font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; }
+td { padding:0.85rem 1rem; border-top:1px solid rgba(255,255,255,0.04); }
+tr:hover td { background:rgba(255,255,255,0.02); }
+
+.cname { color:white; font-weight:600; font-size:0.9rem; }
+.csub { color:rgba(255,255,255,0.3); font-size:0.75rem; }
+.cinfo { color:rgba(255,255,255,0.55); font-size:0.82rem; }
+.stag { background:rgba(124,58,237,0.2); color:#a78bfa; padding:0.2rem 0.6rem; border-radius:6px; font-size:0.8rem; font-weight:600; }
+.ddate { color:white; font-weight:600; font-size:0.88rem; }
+.dtime { color:rgba(255,255,255,0.4); font-size:0.78rem; }
+
+.badge { padding:0.25rem 0.7rem; border-radius:20px; font-size:0.76rem; font-weight:600; }
+.badge.pending { background:rgba(251,191,36,0.15); color:#fbbf24; }
+.badge.confirmed { background:rgba(34,197,94,0.15); color:#4ade80; }
+.badge.cancelled { background:rgba(239,68,68,0.15); color:#f87171; }
+
+.acts { display:flex; gap:0.35rem; }
+.ab { border:none; border-radius:7px; padding:0.4rem 0.6rem; cursor:pointer; font-size:0.82rem; font-weight:600; transition:all 0.2s; }
+.ab.conf { background:rgba(34,197,94,0.12); color:#4ade80; }
+.ab.conf:hover { background:rgba(34,197,94,0.25); }
+.ab.canc { background:rgba(251,191,36,0.12); color:#fbbf24; }
+.ab.canc:hover { background:rgba(251,191,36,0.25); }
+.ab.del { background:rgba(239,68,68,0.1); color:#f87171; }
+.ab.del:hover { background:rgba(239,68,68,0.22); }
+
+@media (max-width: 768px) { .body { grid-template-columns: 1fr; } .sidebar { display: none; } }

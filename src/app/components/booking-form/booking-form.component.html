@@ -1,0 +1,85 @@
+<div class="shell">
+  <nav class="navbar">
+    <div class="nav-brand">✂️ BarberBook</div>
+    <div class="nav-links">
+      @if (authService.isLoggedIn()) {
+        <a routerLink="/my-bookings" class="nav-link">My Appointments</a>
+        @if (authService.isAdmin()) {
+          <a routerLink="/admin" class="nav-link">Admin</a>
+        }
+        <button class="nav-btn-out" (click)="authService.logout()">Sign Out</button>
+      } @else {
+        <a routerLink="/login" class="nav-link">Sign In</a>
+        <a routerLink="/register" class="nav-btn">Register</a>
+      }
+    </div>
+  </nav>
+
+  <div class="main">
+    <!-- LEFT: Hero -->
+    <div class="hero-side">
+      <div class="hero-inner">
+        <div class="badge">✂️ Online Booking</div>
+        <h1>Your appointment,<br><span class="grad">your time.</span></h1>
+        <p>Book your preferred appointment in less than a minute — simple, fast, online.</p>
+        <div class="features">
+          <div class="feat"><span class="feat-icon">⚡</span><span>Instantly confirmed</span></div>
+          <div class="feat"><span class="feat-icon">📱</span><span>No phone call needed</span></div>
+          <div class="feat"><span class="feat-icon">🔄</span><span>Free cancellation</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Form -->
+    <div class="form-side">
+      <div class="form-card">
+        <h2>Request Appointment</h2>
+        <p class="form-sub">We'll confirm your booking shortly</p>
+
+        @if (error) {
+          <div class="err-box">⚠️ {{ error }}</div>
+        }
+
+        <form (ngSubmit)="onSubmit()" #f="ngForm" class="form-body">
+          <div class="row2">
+            <div class="field">
+              <label>Name *</label>
+              <input type="text" [(ngModel)]="booking.customerName" name="name" required placeholder="John Doe" />
+            </div>
+            <div class="field">
+              <label>Email *</label>
+              <input type="email" [(ngModel)]="booking.customerEmail" name="email" required placeholder="john@example.com" />
+            </div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label>Phone</label>
+              <input type="tel" [(ngModel)]="booking.customerPhone" name="phone" placeholder="+1 234 567 8900" />
+            </div>
+            <div class="field">
+              <label>Service *</label>
+              <select [(ngModel)]="booking.service" name="service" required>
+                <option value="">Please select...</option>
+                @for (s of services; track s) {
+                  <option [value]="s">{{ s }}</option>
+                }
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>Preferred Date & Time *</label>
+            <input type="datetime-local" [(ngModel)]="booking.bookingTime" name="time" required />
+          </div>
+          <button type="submit" [disabled]="f.invalid || loading" class="submit-btn">
+            @if (loading) { <span class="spin"></span> Sending... }
+            @else { 🗓 Request Appointment }
+          </button>
+        </form>
+
+        @if (!authService.isLoggedIn()) {
+          <p class="hint"><a routerLink="/login">Sign in</a> to view your bookings later</p>
+        }
+      </div>
+    </div>
+  </div>
+</div>
