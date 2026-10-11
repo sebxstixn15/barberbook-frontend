@@ -74,13 +74,6 @@ src/app/
 | `/my-bookings` | MyBookingsComponent | authGuard |
 | `/admin` | AdminComponent | adminGuard |
 
-## Default Admin Account
-
-```
-Email:    admin@booking.at
-Password: admin123
-```
-
 ## Related
 
 - **Backend:** [barberbook-backend](https://github.com/sebxstixn15/barberbook-backend)
